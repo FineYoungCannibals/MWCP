@@ -35,7 +35,7 @@ rule KnownHostsRule
 	meta:
 		description = ""
 		author = "FH"
-		date = "2025-01-28"
+		date = "2025-01-30"
 		version = "1.0"
 		mwcp = "LinuxFinder.KnownHosts"
 

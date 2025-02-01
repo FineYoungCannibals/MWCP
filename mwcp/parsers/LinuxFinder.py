@@ -63,7 +63,25 @@ class SSHPrivateKey(Parser):
                 self.report.add(metadata.Other("Unencrypted_SSH_Private_Key",m))
                 self.report.add(metadata.Other("Associated_Public_Key",test_is_encrypted[1]))
 
-
+class KnownHosts(Parser):
+    DESCRIPTION = "known hosts file parser for ssh hunting"
+    AUTHOR = "fh"
+    @classmethod
+    def identify(cls, file_object):
+        data = file_object.data.decode(errors="backslashreplace")
+        if len(re.findall('\|1\|',data,re.DOTALL))>1:
+            return True
+        else:
+            return False
+    def run(self):
+        regex = r'\|\d\|(?P<ip>.*?)\|(?P<hostname>.*?)\s+(?P<key>.*?)[\n$]'
+        logger.info(f"{self.DESCRIPTION} by {self.AUTHOR}")
+        file_content = self.file_object.data.decode(errors="backslashreplace")
+        matches = re.findall(regex, file_content, re.IGNORECASE)
+        for m in matches:
+            self.report.add(metadata.Other('unsalted_ip_hash',m[0]))
+            self.report.add(metadata.Other('unsalted_hostname_hash',m[1]))
+            self.report.add(metadata.Other('ssh_server_fingerprint',m[2]))
 
 class Viminfo(Parser):
     DESCRIPTION = "VIM Info Parser"
@@ -89,9 +107,7 @@ class Viminfo(Parser):
         logger.info(f"Search Parsing")
         search_result= []
         search_regex=r'\# Search String History \(newest to oldest\)\:\n(?:(.*?)\n\|[^\n]+)*?\n\n'
-        logger.info(f"pre regex")
         search_matches = re.findall(search_regex, file_content, re.DOTALL)
-        logger.info(f"post regex")
         if len(search_matches) > 0:
             for search in search_matches:
                 logger.info(f"{search}")

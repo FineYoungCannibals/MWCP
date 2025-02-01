@@ -62,3 +62,47 @@ class SSHPrivateKey(Parser):
             else:
                 self.report.add(metadata.Other("Unencrypted_SSH_Private_Key",m))
                 self.report.add(metadata.Other("Associated_Public_Key",test_is_encrypted[1]))
+
+
+
+class Viminfo(Parser):
+    DESCRIPTION = "VIM Info Parser"
+    AUTHOR = "fh"
+
+    @classmethod
+    def identify(cls, file_object):
+        return True
+
+    def run(self):
+        logger.info(f"{self.DESCRIPTION} by {self.AUTHOR}")
+        file_content = self.file_object.data.decode(errors="backslashreplace")
+
+        logger.info(f"Commands Parsing")
+        commands_result= []
+        cli_history_regex = r'\# Command Line History \(newest to oldest\)\:\n(.*?)\n\n'
+        command_matches = re.findall(cli_history_regex, file_content, re.DOTALL)
+        if len(command_matches) > 0:
+            for command in command_matches:
+                commands_result.extend([x for x in command.split('\n') if not x.startswith("|")])
+                self.report.add(metadata.Other('command_history',str(commands_result)))
+
+        logger.info(f"Search Parsing")
+        search_result= []
+        search_regex=r'\# Search String History \(newest to oldest\)\:\n(?:(.*?)\n\|[^\n]+)*?\n\n'
+        logger.info(f"pre regex")
+        search_matches = re.findall(search_regex, file_content, re.DOTALL)
+        logger.info(f"post regex")
+        if len(search_matches) > 0:
+            for search in search_matches:
+                logger.info(f"{search}")
+                search_result.extend([x for x in search.split('\n') if not x.startswith("|")])
+                self.report.add(metadata.Other('search_history',str(search_result)))
+
+        logger.info(f"File History Parsing")
+        file_result= []
+        file_history_regex = r'\# (?:Jumplist|Registers|File marks)[^\:]*?\:\n(.*?)\n\n'
+        file_history_matches = re.findall(file_history_regex, file_content, re.DOTALL)
+        if len(file_history_matches) > 0:
+            for handle in file_history_matches:
+                file_result.extend([x for x in handle.split('\n') if not x.startswith("|")])
+                self.report.add(metadata.Other('file_history',str(file_result)))

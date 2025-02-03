@@ -57,6 +57,8 @@ LinuxFinder:
   parsers:
     - .SSHPrivateKey
     - .SSHPublicKey
+    - .Viminfo
+    - .KnownHosts
 
 GenericDropper:
   description: Generic Dropper

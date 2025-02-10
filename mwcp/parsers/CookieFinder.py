@@ -20,4 +20,5 @@ class GenericVOne(Parser):
         file_content = self.file_object.data.decode(errors="backslashreplace")
         matches = re.findall(regex, file_content, re.IGNORECASE)
         for m in matches:
-            self.report.add(metadata.Credential(m))
+            #self.report.add(metadata.Credential(m))
+            self.report.add(metadata.Other("Cookie_Tuple",m))

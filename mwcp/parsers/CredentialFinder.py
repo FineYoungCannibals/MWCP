@@ -20,7 +20,8 @@ class GenericVOne(Parser):
         file_content = self.file_object.data.decode(errors="backslashreplace")
         matches = re.findall(regex, file_content, re.IGNORECASE)
         for m in matches:
-            self.report.add(metadata.Credential(m))
+            #self.report.add(metadata.Credential(m))
+            self.report.add(metadata.Other('Credential_Tuple',m))
 
 
 class GenericVTwo(Parser):
@@ -37,7 +38,8 @@ class GenericVTwo(Parser):
         file_content = self.file_object.data.decode(errors="backslashreplace")
         matches = re.findall(regex, file_content)
         for m in matches:
-            self.report.add(metadata.Credential(m))
+            #self.report.add(metadata.Credential(m))
+            self.report.add(metadata.Other('Credential_Tuple',m))
 
 class GenericVThree(Parser):
     DESCRIPTION = "Genericv3"
@@ -53,7 +55,8 @@ class GenericVThree(Parser):
         file_content = self.file_object.data.decode(errors="backslashreplace")
         matches = re.findall(regex, file_content,re.IGNORECASE)
         for m in matches:
-            self.report.add(metadata.Credential(m))
+            #self.report.add(metadata.Credential(m))
+            self.report.add(metadata.Other('Credential_Tuple',m))
 
 class AzVOne(Parser):
     DESCRIPTION="Parser for Azlt v1"
@@ -69,7 +72,9 @@ class AzVOne(Parser):
         file_content = self.file_object.data.decode(errors="backslashreplace")
         matches = re.findall(regex, file_content, re.IGNORECASE)
         for m in matches:
-            self.report.add(metadata.Credential(m))
+            #self.report.add(metadata.Credential(m))
+            self.report.add(metadata.Other('Credential_Tuple',m))
+
 
 
 class AzVTwo(Parser):
@@ -86,7 +91,8 @@ class AzVTwo(Parser):
         file_content = self.file_object.data.decode(errors="backslashreplace")
         matches = re.findall(regex, file_content, re.IGNORECASE)
         for m in matches:
-            self.report.add(metadata.Credential(m))
+            #self.report.add(metadata.Credential(m))
+            self.report.add(metadata.Other('Credential_Tuple',m))
 
 class AzVThree(Parser):
     DESCRIPTION="Parser for Azlt v3"
@@ -101,4 +107,5 @@ class AzVThree(Parser):
         file_content = self.file_object.data.decode(errors="backslashreplace")
         matches = re.findall(regex, file_content, re.IGNORECASE)
         for m in matches:
-            self.report.add(metadata.Credential(m))
+            #self.report.add(metadata.Credential(m))
+            self.report.add(metadata.Other('Credential_Tuple',m))

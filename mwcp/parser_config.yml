@@ -28,6 +28,7 @@ AutofillFinder:
   author: fh
   parsers:
     - .GenericVOne
+    - .GenericVTwo
 
 CookieFinder:
   description: A parser to identify potential cookie files in a text format

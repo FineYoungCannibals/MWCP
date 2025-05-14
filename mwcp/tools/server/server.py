@@ -78,6 +78,7 @@ def run_parsers(parsers):
     output.setdefault("errors", []).append(dep_warning)
 
     datafile = flask.request.files.get("data")
+    datastring = flask.request.form.get("data")
     if datafile:
         data = datafile.read()
         flask.current_app.logger.info(
@@ -90,6 +91,18 @@ def run_parsers(parsers):
             if parser:
                 # TODO: Determine if it should be possible to specify the output format and have file data not be included
                 report = _run_parser(parser, data)
+                output[parser] = _format_report(report)
+    elif datastring:
+        data = datastring
+        flask.current_app.logger.info(
+            "run_parsers %s %s %s",
+            parsers,
+            hashlib.md5(data).hexdigest(),
+            hashlib.sha256(data).hexdigest()
+        )
+        for parser in parsers.split("/"):
+            if parser:
+                report = _run_parser(parser,data)
                 output[parser] = _format_report(report)
     else:
         output.setdefault("errors", []).append("No input file provided")

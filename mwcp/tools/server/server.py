@@ -97,8 +97,8 @@ def run_parsers(parsers):
         flask.current_app.logger.info(
             "run_parsers %s %s %s",
             parsers,
-            hashlib.md5(data).hexdigest(),
-            hashlib.sha256(data).hexdigest()
+            hashlib.md5(data.encode("utf-8")).hexdigest(),
+            hashlib.sha256(data.encode("utf-8")).hexdigest()
         )
         for parser in parsers.split("/"):
             if parser:

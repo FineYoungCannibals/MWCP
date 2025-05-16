@@ -5,8 +5,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "100.94.216.28:9001:8080"
-    volumes:
-      - ./yara_rules:/root/yara_repo
     entrypoint: ["mwcp", "serve", "--host","0.0.0.0","--port","8080"]
     restart: unless-stopped
     labels:

@@ -4,8 +4,8 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "100.94.216.28:9001:8080"
-    entrypoint: ["mwcp", "serve", "--host","0.0.0.0","--port","8080"]
+      - "100.94.216.28:9002:9002"
+    entrypoint: ["mwcp", "serve", "--host","0.0.0.0","--port","9002"]
     restart: unless-stopped
     labels:
       - "traefik.enable=true"

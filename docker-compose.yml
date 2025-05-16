@@ -9,6 +9,6 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.wikijs.rule=HOST(`mwcp.trashcollector.dev`)"
-      - "traefik.http.routers.wikijs.entrypoints=https"
-      - "traefik.http.routers.wikijs.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.mwcp.rule=HOST(`mwcp.trashcollector.dev`)"
+      - "traefik.http.routers.mwcp.entrypoints=https"
+      - "traefik.http.routers.mwcp.tls.certresolver=letsencrypt"

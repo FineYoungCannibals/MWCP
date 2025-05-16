@@ -13,6 +13,7 @@ setup(
     url="https://github.com/dod-cyber-crime-center/DC3-MWCP/",
     packages=find_namespace_packages(),
     include_package_data=True,
+    package_data={"mwcp":["config/*.yml"]},
     license='MIT',
     classifiers=[
         'Development Status :: 5 - Production/Stable',

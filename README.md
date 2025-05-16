@@ -1,5 +1,13 @@
 # DC3-MWCP
 
+DC3 Malware Configuration Parser (DC3-MWCP) is a framework for parsing configuration information from malware.
+The information extracted from malware includes items such as addresses, passwords, filenames, and
+mutex names. A parser module is usually created per malware family.
+DC3-MWCP is designed to help ensure consistency in parser function and output, ease parser development,
+and facilitate parser sharing. DC3-MWCP supports both analyst directed analysis and
+large-scale automated execution, utilizing either the native python API, a REST API, or a provided
+command line tool. DC3-MWCP is authored by the Defense Cyber Crime Center (DC3).
+
 - [Install](#install)
 - [Builtin Parsers](#builtin-parsers)
 - [Dragodis Support](#dragodis-support)
@@ -648,10 +656,3 @@ MWCP comes with a few helper utilities (located in `mwcp.utils`) that may become
 
 [Changelog](CHANGELOG.md) | [Releases](https://github.com/finleyh/DC3-MWCP/releases)
 
-DC3 Malware Configuration Parser (DC3-MWCP) is a framework for parsing configuration information from malware.
-The information extracted from malware includes items such as addresses, passwords, filenames, and
-mutex names. A parser module is usually created per malware family.
-DC3-MWCP is designed to help ensure consistency in parser function and output, ease parser development,
-and facilitate parser sharing. DC3-MWCP supports both analyst directed analysis and
-large-scale automated execution, utilizing either the native python API, a REST API, or a provided
-command line tool. DC3-MWCP is authored by the Defense Cyber Crime Center (DC3).

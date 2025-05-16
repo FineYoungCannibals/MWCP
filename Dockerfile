@@ -4,9 +4,6 @@ RUN apt-get update && apt-get install -y git
 
 WORKDIR /app
 
-COPY setup.cfg setup.py requirements.txt /app
-RUN pip install -r requirements.txt
-
-COPY mwcp /app/mwcp
+COPY src .
 
 RUN pip install . && cp -r /app/mwcp/yara_repo/. /root/yara_repo/ 

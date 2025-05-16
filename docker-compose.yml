@@ -7,8 +7,14 @@ services:
       - "100.94.216.28:9002:8080"
     entrypoint: ["mwcp", "serve", "--host","0.0.0.0","--port","8080"]
     restart: unless-stopped
+    networks:
+      - lab
+        
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.mwcp_service.rule=HOST(`mwcp.trashcollector.dev`)"
       - "traefik.http.routers.mwcp_service.entrypoints=https"
       - "traefik.http.routers.mwcp_service.tls.certresolver=letsencrypt"
+networks:
+  lab:
+    external: true

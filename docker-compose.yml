@@ -1,5 +1,5 @@
 services:
-  mwcp:
+  mwcp_service:
     build:
       context: .
       dockerfile: Dockerfile
@@ -9,6 +9,6 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.mwcp-mwcp-service.rule=HOST(`mwcp.trashcollector.dev`)"
-      - "traefik.http.routers.mwcp-mwcp-service.entrypoints=https"
-      - "traefik.http.routers.mwcp-mwcp-service.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.mwcp_service.rule=HOST(`mwcp.trashcollector.dev`)"
+      - "traefik.http.routers.mwcp_service.entrypoints=https"
+      - "traefik.http.routers.mwcp_service.tls.certresolver=letsencrypt"

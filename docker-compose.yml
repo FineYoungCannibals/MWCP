@@ -14,6 +14,6 @@ services:
       - "traefik.http.routers.mwcp.tls.certresolver=letsencrypt"
       - "traefik.http.services.mwcp.loadbalancer.server.port=8080"
 
-    networks:
-      dev_lab:
-        external: true
+networks:
+  dev_lab:
+    external: true

@@ -2,7 +2,7 @@ name: Build and Publish MWCP Image to GHCR
 
 on:
   push:
-    branches: [main]
+    branches: [master]
     paths:
       - Dockerfile
       - 'src/mwcp/yara_rep/**'

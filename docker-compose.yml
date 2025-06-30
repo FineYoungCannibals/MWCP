@@ -1,15 +1,19 @@
 services:
   mwcp:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      #- "100.94.216.28:9002:8080"
-      - "100.113.124.91:9002:8080"
+    image: ghcr.io/fineyoungcannibals/MWCP:latest
     entrypoint: ["mwcp", "serve", "--host","0.0.0.0","--port","8080"]
     restart: unless-stopped
+    networks:
+      - dev_lab
     labels:
       - "traefik.enable=true"
+      - "traefik.docker.network=dev_lab"
       - "traefik.http.routers.wikijs.rule=HOST(`mwcp.trashcollector.dev`)"
-      - "traefik.http.routers.wikijs.entrypoints=https"
-      - "traefik.http.routers.wikijs.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.mwcp.entrypoints=https"
+      - "traefik.http.routers.mwcp.tls=true"
+      - "traefik.http.routers.mwcp.tls.certresolver=letsencrypt"
+      - "traefik.http.services.mwcp.loadbalancer.server.port=8080"
+
+    networks:
+      dev_lab:
+        external: true
